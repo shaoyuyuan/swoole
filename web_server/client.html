@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客户端</title>
+</head>
+<body>
+
+    <script>
+        var wsServer = 'ws:192.168.1.51:9502';
+        var websocket = new WebSocket(wsServer);
+        websocket.onopen = function (evt) {
+            console.log('Connected to WebSocket server.');
+        };
+        websocket.onclose = function (evt) {
+            console.log(evt);
+        };
+        websocket.onmessage = function (evt) {
+            console.log('Retrieved data from server: ' + evt.data);
+        };
+        websocket.onerror = function (evt, e) {
+            console.log('Error occured: ' + evt.data);
+        }
+        function send(data) {
+            websocket.send(data);
+        }
+        function onClose() {
+            websocket.close();
+        }
+    </script>
+</body>
+</html>
